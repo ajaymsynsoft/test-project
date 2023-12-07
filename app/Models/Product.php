@@ -19,5 +19,13 @@ class Product extends Model
         'title',
         'description',
         'price',
+        'rating',
+        'brand',
+        'discountPercentage',
+        'stock',
+        'category',
+        'thumbnail',
+        'images',
     ];
 }
+									
