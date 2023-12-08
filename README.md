@@ -53,11 +53,8 @@ Develop a Laravel application to fetch and display products from DummyJSON.com A
 
 Visit http://127.0.0.1:8000 in your browser.
 
-10. **Run database migrations:**   
-   ```bash
-   php artisan migrate
-
-After run migration commands your database will ready.
+10. **Run database migrations:**        
+php artisan migrate
 
 11. **Configure the Task Scheduler:**   
 Laravel's task scheduler needs to be configured to run periodically. You can do this by adding the following cron entry to your server:
