@@ -53,29 +53,16 @@ Develop a Laravel application to fetch and display products from DummyJSON.com A
 
 Visit http://127.0.0.1:8000 in your browser.
 
-10. **Run database migrations:**        
-php artisan migrate
-
-11. **Configure the Task Scheduler:**   
+10. **Configure the Task Scheduler:**   
 Laravel's task scheduler needs to be configured to run periodically. You can do this by adding the following cron entry to your server:
       ```bash
       * * * * * cd /path-to-your-laravel-project && php artisan schedule:run >> /dev/null 2>&1
 
-12. **Test the Scheduler:**   
+11. **Test the Scheduler:**   
 Finally, test your scheduler by running the following command in your terminal:
       ```bash
       php artisan schedule:run
 
-This command will manually run any due scheduled tasks. You should see the output of your fetch product command if the scheduler is set up correctly.
-
-Usage
-Explain how to use or run the project. Include any additional details or steps that are important for developers or users.
-
-Additional Configuration
-If there are additional configuration steps required, document them here.
-
-Contributing
-If you'd like to contribute to this project, please follow the Contributing Guidelines.
 
 License
 This project is licensed under the MIT License.
