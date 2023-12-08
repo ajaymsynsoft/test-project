@@ -21,62 +21,49 @@ class ProductController extends Controller
         $this->client = $client;
     }
 
-    // public function fetchProducts()
-    // {
-    //     $client = new Client();
-    //     $products = [];
-
-    //     // Fetch 10 products per request, covering the first 3 pages
-    //     for ($page = 1; $page <= 3; $page++) {
-    //         $response = $client->get("https://dummyjson.com/products?page=$page&limit=10");
-    //         $data = json_decode($response->getBody(), true);
-    //         $products = array_merge($products, $data);
-    //     }
-
-    //     // Save products to database or perform any other actions
-
-    //     return response()->json(['message' => 'Products fetched successfully']);
-    // }   
+ 
     public function fetchProducts()
     {
-        $client = new Client();
-        $existingProducts = Product::pluck('id')->toArray();
-        $newProducts = [];
+        try {
+            $client = new Client();
+            $existingProducts = Product::pluck('id')->toArray();
+            $newProducts = [];
+            $product_url=config('constants.EXTERNAL_PRODUCT_URL');
+            $no_of_page=config('constants.NUMBER_OF_PAGE_FETCH');
+            $limit=config('constants.FETCH_PRODUCTS_PER_REQUEST');
 
-        // Fetch 10 products per request, covering the first 3 pages
-        for ($page = 1; $page <= 3; $page++) {
-            $response = $client->get("https://dummyjson.com/products?page=$page&limit=10");
-            $data = json_decode($response->getBody(), true);
-          
-        
-
-
-            foreach ($data['products'] as $product) {
-                var_dump($product);
-                // Check if the product already exists in the database
-                if (!in_array($product['id'], $existingProducts)) {
-                    // Save the product to the database or perform any other actions
-                    Product::create([
-                        'id' => $product['id'],
-                        'title' => $product['title'],
-                        'description' => $product['description'],
-                        'price' => $product['price'],
-                        'discountPercentage' => $product['discountPercentage'],
-                        'rating' => $product['rating'] ? $product['rating']: 0 ,
-                        'stock' => $product['stock'],
-                        'brand' => $product['brand'],
-                        'category' => $product['category'],
-                        'thumbnail' => $product['thumbnail'],
-                        'images' => json_encode($product['images']),
-                        // Add other fields as needed
-                    ]);
-var_dump($product);
-                    $newProducts[] = $product;
+            // Fetch 10 products per request, covering the first 3 pages
+            for ($page = 1; $page <= $no_of_page; $page++) {
+                $response = $client->get("$product_url?page=$page&limit=$limit");
+                $data = json_decode($response->getBody(), true);       
+                foreach ($data['products'] as $product) {              
+                    // Check if the product already exists in the database
+                    if (!in_array($product['id'], $existingProducts)) {
+                        // Save the product to the database or perform any other actions
+                        Product::create([
+                            'id' => $product['id'],
+                            'title' => $product['title'],
+                            'description' => $product['description'],
+                            'price' => $product['price'],
+                            'discountPercentage' => $product['discountPercentage'],
+                            'rating' => $product['rating'] ? $product['rating']: 0 ,
+                            'stock' => $product['stock'],
+                            'brand' => $product['brand'],
+                            'category' => $product['category'],
+                            'thumbnail' => $product['thumbnail'],
+                            'images' => json_encode($product['images']),
+                            // Add other fields as needed
+                        ]);
+                        $newProducts[] = $product;
+                    }
                 }
             }
-        }
 
-        return response()->json(['message' => 'Products fetched and updated successfully', 'new_products' => $newProducts]);
+            return response()->json(['message' => 'Products fetched and updated successfully', 'new_products' => $newProducts]);
+        } catch (\Exception $e) {
+            // Handle the exception and send an error response
+            return response()->json(['error' => 'An error occurred', 'message' => $e->getMessage()], 500);
+        }
     }
     
 
@@ -88,7 +75,8 @@ var_dump($product);
      */
     public function index()
     {
-        $products = Product::paginate(5);
+        $limit=config('constants.PRODUCTS_PER_PAGE');
+        $products = Product::paginate($limit);
 
         return view('products.index', compact('products'));
     }
