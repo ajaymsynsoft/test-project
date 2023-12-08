@@ -57,6 +57,7 @@ Visit http://127.0.0.1:8000 in your browser.
    ```bash
    php artisan migrate
 
+
 11. **Configure the Task Scheduler:**   
 Laravel's task scheduler needs to be configured to run periodically. You can do this by adding the following cron entry to your server:
       ```bash
