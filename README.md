@@ -17,31 +17,40 @@ Develop a Laravel application to fetch and display products from DummyJSON.com A
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/your-username/your-laravel-project.git
+   git clone https://github.com/ajaymsynsoft/test-project.git
 
 2. **Navigate to the project directory:**   
-cd your-laravel-project
+   ```bash
+   cd test-project
 
 3. **Install PHP dependencies:**   
-composer install
+   ```bash
+   composer install
 
 4. **Install JavaScript dependencies:**   
-npm install
+   ```bash
+   npm install
 
-5. **Copy the .env file:**   
-cp .env.example .env
+5. **Copy the .env file:**  
+   ```bash 
+   cp .env.example .env
 
 6. **Generate application key:**   
-php artisan key:generate
+   ```bash
+   php artisan key:generate
 
 7. **Run database migrations:**   
-php artisan migrate
+   ```bash
+   php artisan migrate
 
 8. **Compile assets:**   
-npm run dev
+   ```bash
+   npm run dev
 
 9. **Serve the application:**   
-php artisan serve
+   ```bash
+   php artisan serve
+
 Visit http://127.0.0.1:8000 in your browser.
 
 10. **Run database migrations:**   
@@ -53,18 +62,14 @@ Laravel's task scheduler needs to be configured to run periodically. You can do 
 
 12. **Test the Scheduler:**   
 Finally, test your scheduler by running the following command in your terminal:
+
 php artisan schedule:run
 
+
 This command will manually run any due scheduled tasks. You should see the output of your fetch product command if the scheduler is set up correctly.
+app\Console\Kernel.php
 
-Usage
-Explain how to use or run the project. Include any additional details or steps that are important for developers or users.
-
-Additional Configuration
-If there are additional configuration steps required, document them here.
-
-Contributing
-If you'd like to contribute to this project, please follow the Contributing Guidelines.
+For testing purpose we can reduce cron time to everyMinute also.
 
 License
 This project is licensed under the MIT License.
