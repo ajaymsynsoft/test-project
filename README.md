@@ -20,49 +20,51 @@ Develop a Laravel application to fetch and display products from DummyJSON.com A
    git clone https://github.com/your-username/your-laravel-project.git
 
 2. **Navigate to the project directory:**   
-   ```bash
-   cd your-laravel-project
+cd your-laravel-project
 
 3. **Install PHP dependencies:**   
-   ```bash
-   composer install
+composer install
 
 4. **Install JavaScript dependencies:**   
-   ```bash
-   npm install
+npm install
 
 5. **Copy the .env file:**   
-   ```bash
-   cp .env.example .env
+cp .env.example .env
 
-6. **Generate application key:**  
-   ```bash 
-   php artisan key:generate
+6. **Generate application key:**   
+php artisan key:generate
 
 7. **Run database migrations:**   
-   ```bash
-   php artisan migrate
+php artisan migrate
 
 8. **Compile assets:**   
-   ```bash
-   npm run dev
+npm run dev
 
 9. **Serve the application:**   
-   ```bash
-   php artisan serve
-
+php artisan serve
 Visit http://127.0.0.1:8000 in your browser.
 
-10. **Configure the Task Scheduler:**   
+10. **Run database migrations:**   
+php artisan migrate
+
+11. **Configure the Task Scheduler:**   
 Laravel's task scheduler needs to be configured to run periodically. You can do this by adding the following cron entry to your server:
-      ```bash
-      * * * * * cd /path-to-your-laravel-project && php artisan schedule:run >> /dev/null 2>&1
+* * * * * cd /path-to-your-laravel-project && php artisan schedule:run >> /dev/null 2>&1
 
-11. **Test the Scheduler:**   
+12. **Test the Scheduler:**   
 Finally, test your scheduler by running the following command in your terminal:
-      ```bash
-      php artisan schedule:run
+php artisan schedule:run
 
+This command will manually run any due scheduled tasks. You should see the output of your fetch product command if the scheduler is set up correctly.
+
+Usage
+Explain how to use or run the project. Include any additional details or steps that are important for developers or users.
+
+Additional Configuration
+If there are additional configuration steps required, document them here.
+
+Contributing
+If you'd like to contribute to this project, please follow the Contributing Guidelines.
 
 License
 This project is licensed under the MIT License.
