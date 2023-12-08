@@ -13,9 +13,14 @@
                                 <h4>{{ $product->name }}</h4>
                                 <p>{{ $product->description }}</p>
                                 <p>Price: ${{ $product->price }}</p>
+                                <p>Rating: {{ $product->rating }}</p>
+                                <p>Drand: {{ $product->brand }}</p>
+                                <p>Discount Percentage: {{ $product->discountPercentage }}</p>
+                                <p>Stock: {{ $product->stock }}</p>
+                                <p>Category: {{ $product->category }}</p>                                
+                                <img src="{{$product->thumbnail}}"/>
                             </div>
                         @endforeach
-
                         {{ $products->links() }}
                     </div>
                 </div>
