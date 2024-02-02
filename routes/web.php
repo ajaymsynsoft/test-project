@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProductController;
+use App\Http\Middleware\ActivityLoggerMiddleware;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,16 +15,10 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::get('/', function () {
-    if (Auth::check()) {
-        return redirect('/products');
-    } else {
-        return view('auth.login');
-    }
-});
+Route::get('/',    function () {
+    return view('welcome');
+})->middleware(ActivityLoggerMiddleware::class);
 
-Auth::routes();
+Auth::routes()->middleware(ActivityLoggerMiddleware::class);
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-});
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
